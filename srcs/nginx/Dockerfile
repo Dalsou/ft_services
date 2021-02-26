@@ -1,19 +1,16 @@
 # Base OS
-FROM alpine
+FROM alpine:latest
 
-# Update
-RUN apk update
+# Update & install nginx
+RUN apk update \
+	&& apk add nginx
 
-# Install tool to download 
-RUN apk add wget
-
-# Install NGINX & MYSQL & PHP
-RUN apk add nginx
-
+# (à supprimer à la fin)
 RUN apk add vim
 
+# Copy files to configurate
 COPY ./nginx.conf /etc/nginx
 COPY ./index.html /var/www/localhost
 
-
+# Expose
 EXPOSE 80

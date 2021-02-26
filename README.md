@@ -1,5 +1,13 @@
 # ft_services
 
-TO DO :
+docker build -t ftps .
+docker run -d --name=ftps_1 -p 21:21 ftps
+docker stop ftps_1 && docker system prune
 
-- fichier setup 
+
+docker ps
+docker stop
+docker image rm ID
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
