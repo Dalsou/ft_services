@@ -16,4 +16,9 @@ RUN mkdir /www \
 	&& tar zxvf latest.tar.gz \
 	&& rm *.gz
 
+ADD setup.sh 			/srcs/setup.sh
+ADD wp-config.php		/www/wp-config.php
+
 EXPOSE 5050
+
+CMD ["sh", "/srcs/setup.sh"]
