@@ -11,3 +11,11 @@ docker image rm ID
 
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
+
+À faire :
+
+- harmoniser sous dossier
+- Grafana + InfluxDB + Telegraf
+- Ports (donne deux ports diff, peut-etre inter et externe)
+- nginx ssl beug
+

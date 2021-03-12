@@ -4,23 +4,33 @@
 
 # Starting minikube
 echo "Starting minikube ..."
-minikube --vm-driver=virtualbox start --extra-config=apiserver.service-node-port-range=1-25000
+minikube --vm-driver=docker start
 
 # Enable addons
 minikube addons enable dashboard
+minikube addons enable metrics-server
 
-# Dashboard
+# Use the docker daemon from minikube
+eval $(minikube docker-env)
+
+# Build docker images
+docker build -t my_nginx ./srcs/nginx
+#docker build -t my_ftps ./srcs/ftps
+#docker build -t my_wordpress ./srcs/wordpress
+#docker build -t my_mysql ./srcs/mysql
+#docker build -t my_phpmyadmin ./srcs/phpmyadmin
+
+# Apply yaml resources
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+kubectl apply -f srcs/metallb.yaml
+kubectl apply -f ./srcs/nginx.yaml
+#kubectl apply -f ./srcs/ftps.yaml
+#kubectl apply -f ./srcs/wordpress.yaml
+#kubectl apply -f ./srcs/mysql.yaml
+#kubectl apply -f ./srcs/phpmyadmin.yaml
+
+# Open dashboard
 minikube dashboard &
-
-docker build -t ftps ./srcs/ftps
-docker build -t nginx ./srcs/nginx
-docker build -t wordpress ./srcs/wordpress
-docker build -t mysql ./srcs/mysql
-docker build -t phpmyadmin ./srcs/phpmyadmin
-
-kubectl create -f ./srcs/nginx.yaml
-kubectl create -f ./srcs/ftps.yaml
-kubectl create -f ./srcs/wordpress.yaml
-kubectl create -f ./srcs/mysql.yaml
-kubectl create -f ./srcs/phpmyadmin.yaml
 

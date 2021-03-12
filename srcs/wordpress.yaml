@@ -5,15 +5,15 @@ metadata:
   labels:
     app: wordpress
 spec:
-  type: NodePort
+  type: LoadBalancer
+  loadBalancerIP: 172.17.0.3
   selector:
     app: wordpress
   ports:
   - port: 5050
-    targetPort: 5050
-    nodePort: 5050
+    targetPort: 80
     protocol: TCP
-    name: http
+    name: wp-port
 
 ---
 
@@ -35,4 +35,8 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: wordpress
+        image: my_wordpress
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+          name: wp-port

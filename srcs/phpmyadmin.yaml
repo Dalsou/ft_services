@@ -5,14 +5,15 @@ metadata:
   labels:
     app: phpmyadmin
 spec:
-  type: NodePort
+  type: LoadBalancer
+  loadBalancerIP: 172.17.0.4
   selector:
     app: phpmyadmin
   ports:
   - port: 5000
-    nodePort: 5000
+    targetPort: 80
     protocol: TCP
-    name: http
+    name: php-port
 
 ---
 
@@ -34,6 +35,8 @@ spec:
     spec:
       containers:
       - name: phpmyadmin
-        image: phpmyadmin
+        image: my_phpmyadmin
+        imagePullPolicy: Never
         ports:
-        - containerPort: 5000
+        - containerPort: 80
+          name: php-port

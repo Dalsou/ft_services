@@ -1,1 +1,1 @@
-php -S 0.0.0.0:5050 -t /www/wordpress
+/usr/bin/php -S 0.0.0.0:80 -t /www

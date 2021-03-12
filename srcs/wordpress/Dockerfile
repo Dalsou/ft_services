@@ -11,9 +11,9 @@ RUN apk update \
 
 # Download the last version of Wordpress & uncompress it
 RUN mkdir /www \
-	&& cd /www \
     && curl -LO https://wordpress.org/latest.tar.gz \
 	&& tar zxvf latest.tar.gz \
+	&& mv wordpress /www \
 	&& rm *.gz
 
 ADD setup.sh 			/srcs/setup.sh

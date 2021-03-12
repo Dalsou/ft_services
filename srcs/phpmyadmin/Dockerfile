@@ -11,7 +11,6 @@ RUN apk update && apk add openrc \
 
 # Get files
 RUN mkdir /www \
-	&& cd /www \
     && curl -LO http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-all-languages.tar.gz \
 	&& tar zxvf phpMyAdmin-5.0.2-all-languages.tar.gz \
 	&& mv phpMyAdmin-5.0.2-all-languages /www/phpmyadmin \
