@@ -2,29 +2,26 @@
 FROM alpine:latest
 
 # Update & install nginx & dependencies
-RUN apk update && apk add openrc \
+RUN apk update && apk add openrc --no-cache \
 	&& apk add nginx openssl openssh
 
-# Create files
-RUN mkdir www /run/nginx \
-	&& echo "root:root" | chpasswd
+RUN mkdir -p /run/nginx www
 
 # Copy files to config
-ADD nginx.conf		/etc/nginx/
-ADD setup.sh 		/srcs/
-ADD index.html		/www/
-ADD sshd_config 	/etc/ssh/
-ADD ssl_params.conf /etc/nginx
+ADD nginx.conf	/etc/nginx/
+ADD setup.sh 	/srcs/
+RUN chmod +x 	/srcs/setup.sh
+ADD index.html	/www/
+RUN chown -R nginx:nginx /www/
 
 # Config openssl
-RUN openssl req -x509 -nodes -subj '/C=FR/ST=IDF/L=PARIS/O=afoulqui/CN=localhost' \
-	-days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key \
-	-out /etc/ssl/certs/nginx-selfsigned.crt \
-	&& openssl dhparam -dsaparam -out /etc/ssl/certs/dhparam.pem 2048
+RUN openssl req -newkey rsa:2048 -nodes -days 365 -x509 \
+	-subj "/C=FR/ST=IDF/L=Paris/O=42/OU=afoulqui/CN=localhost" \
+	-keyout /etc/ssl/private/nginx-selfsigned.key \
+	-out /etc/ssl/certs/nginx-selfsigned.crt
 
 # Config ssh
-RUN	ssh-keygen -A
-
+ADD sshd_config 		/etc/ssh/
 
 # Expose
 EXPOSE	22 80 443

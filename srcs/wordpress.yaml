@@ -4,14 +4,15 @@ metadata:
   name: wordpress
   labels:
     app: wordpress
+  annotations:
+    metallb.universe.tf/allow-shared-ip: minikube
 spec:
   type: LoadBalancer
-  loadBalancerIP: 172.17.0.3
   selector:
     app: wordpress
   ports:
   - port: 5050
-    targetPort: 80
+    targetPort: 5050
     protocol: TCP
     name: wp-port
 
@@ -38,5 +39,5 @@ spec:
         image: my_wordpress
         imagePullPolicy: Never
         ports:
-        - containerPort: 80
+        - containerPort: 5050
           name: wp-port

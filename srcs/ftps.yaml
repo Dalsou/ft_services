@@ -4,9 +4,10 @@ metadata:
   name: ftps
   labels:
     app: ftps
+  annotations:
+    metallb.universe.tf/allow-shared-ip: minikube
 spec:
   type: LoadBalancer
-  loadBalancerIP: 172.17.0.5
   selector:
     app: ftps
   ports:

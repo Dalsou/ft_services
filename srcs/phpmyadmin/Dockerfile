@@ -17,8 +17,9 @@ RUN mkdir /www \
 	&& rm *.gz
 
 # Copy files
-ADD setup.sh 			/srcs/setup.sh
-ADD config.inc.php		/www/phpmyadmin
+ADD setup.sh 			/srcs/
+RUN chmod +x 			/srcs/setup.sh
+ADD config.inc.php		/www/
 
 # Expose port
 EXPOSE 5000

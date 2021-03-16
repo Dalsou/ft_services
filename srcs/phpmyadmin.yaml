@@ -4,14 +4,15 @@ metadata:
   name: phpmyadmin
   labels:
     app: phpmyadmin
+  annotations:
+    metallb.universe.tf/allow-shared-ip: minikube
 spec:
   type: LoadBalancer
-  loadBalancerIP: 172.17.0.4
   selector:
     app: phpmyadmin
   ports:
   - port: 5000
-    targetPort: 80
+    targetPort: 5000
     protocol: TCP
     name: php-port
 
@@ -38,5 +39,5 @@ spec:
         image: my_phpmyadmin
         imagePullPolicy: Never
         ports:
-        - containerPort: 80
+        - containerPort: 5000
           name: php-port

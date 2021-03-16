@@ -1,10 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: nginx-service
+  labels:
+    app: nginx
+  annotations:
+    metallb.universe.tf/allow-shared-ip: minikube
 spec:
   type: LoadBalancer
-  loadBalancerIP: 172.17.0.2
+  selector:
+    app: nginx
   ports:
   - name: http
     port: 80
@@ -18,22 +23,20 @@ spec:
     port: 22
     targetPort: 22
     protocol: TCP
-  selector:
-    app: nginx
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-deployment
   labels:
     app: nginx
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: nginx
+  replicas: 1
   template:
     metadata:
       labels:

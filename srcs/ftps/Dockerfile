@@ -5,8 +5,9 @@ FROM alpine:latest
 RUN apk update && apk add vsftpd openssl
 
 # Copy files
-ADD vsftpd.conf /etc/vsftpd/vsftpd.conf
-ADD setup.sh	/srcs/setup.sh
+ADD vsftpd.conf /etc/vsftpd/
+ADD setup.sh	/srcs/
+RUN chmod +x	/srcs/setup.sh
 
 # Config openssl
 RUN openssl req -x509 -nodes -subj '/C=FR/ST=IDF/L=PARIS/O=afoulqui/CN=localhost' \
