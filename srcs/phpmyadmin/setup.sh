@@ -1,2 +1,3 @@
-/usr/bin/php -S 0.0.0.0:5000 -t /www/
-tail -f /dev/null
+php-fpm7 -R && nginx -g 'daemon off;'
+
+tail -f /dev/null 

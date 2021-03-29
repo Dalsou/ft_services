@@ -1,6 +1,3 @@
-set -u
-set -e
-
 # Nginx starting
 openrc
 touch /run/openrc/softlevel

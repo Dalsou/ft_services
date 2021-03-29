@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: phpmyadmin
+  name: phpmyadmin-service
   labels:
     app: phpmyadmin
   annotations:
-    metallb.universe.tf/allow-shared-ip: minikube
+    metallb.universe.tf/allow-shared-ip: default
 spec:
   type: LoadBalancer
   selector:
@@ -14,14 +14,13 @@ spec:
   - port: 5000
     targetPort: 5000
     protocol: TCP
-    name: php-port
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phpmyadmin
+  name: phpmyadmin-deployment
   labels:
     app: phpmyadmin
 spec:
@@ -40,4 +39,3 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
-          name: php-port

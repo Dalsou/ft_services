@@ -24,6 +24,6 @@ RUN openssl req -newkey rsa:2048 -nodes -days 365 -x509 \
 ADD sshd_config 		/etc/ssh/
 
 # Expose
-EXPOSE	22 80 443
+EXPOSE	80 443
 
 CMD ["sh", "/srcs/setup.sh"]
