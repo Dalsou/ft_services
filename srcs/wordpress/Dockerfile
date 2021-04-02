@@ -12,7 +12,9 @@ RUN apk update \
 	php7-pdo_mysql php7-pdo_sqlite php7-gettext \
 	php7-xmlreader php7-xmlrpc php7-bz2 \
 	php7-iconv php7-pdo_dblib php7-ctype \
-	nginx openssl openrc curl
+	nginx openssl openrc curl \
+	&& apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
+
 
 # Download the last version of Wordpress & uncompress it
 RUN mkdir -p /var/www/ \
@@ -29,11 +31,12 @@ RUN openssl req -newkey rsa:2048 -nodes -days 365 -x509 \
 	-out /etc/ssl/certs/nginx-selfsigned.crt
 
 # Add files
-ADD wp-config.php			/var/www/wordpress/
-RUN mkdir -p 				/run/nginx 
-ADD nginx.conf 				/etc/nginx/conf.d/default.conf
-ADD setup.sh 				/srcs/
-RUN chmod +x 				/srcs/setup.sh
+ADD wp-config.php		/var/www/wordpress/
+RUN mkdir -p 			/run/nginx 
+ADD nginx.conf 			/etc/nginx/conf.d/default.conf
+ADD setup.sh 			/srcs/
+RUN chmod +x 			/srcs/setup.sh
+ADD telegraf.conf		/etc/telegraf/
 
 RUN	sed -i 's/nobody/root/g' /etc/php7/php-fpm.d/www.conf
 RUN	echo "clear_env = no" >> /etc/php7/php-fpm.d/www.conf 

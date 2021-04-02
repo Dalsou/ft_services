@@ -1,3 +1,10 @@
-cd /usr/sbin/grafana-server --homepath=/usr/share/grafana
+#!/bin/sh
 
-tail -f /dev/null
+# Start Telegraf
+telegraf & 
+
+# Start grafana
+grafana-server --homepath=/usr/share/grafana 
+
+# Keep container running
+tail -f /dev/null 

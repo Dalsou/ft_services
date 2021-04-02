@@ -1,3 +1,8 @@
+#!/bin/sh
+
+# Start Telegraf
+telegraf & 
+
 # Install MariaDB database
 mariadb-install-db -u root
 

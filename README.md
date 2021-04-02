@@ -14,8 +14,9 @@ docker rm $(docker ps -a -q)
 
 À faire :
 
-- harmoniser sous dossier
-- Grafana + InfluxDB + Telegraf
-- Ports (donne deux ports diff, peut-etre inter et externe)
-- nginx ssl beug
+- (harmoniser sous dossier) pas grand chose à faire
+- créer path wordpress phpmyadmin (reverse proxy)
+- create user wp (easy)
+- ajouter dashboards (id 5955)
+
 

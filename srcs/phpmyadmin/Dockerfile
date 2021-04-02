@@ -7,7 +7,8 @@ RUN apk update \
 	php7-opcache php7-gd php7-mysqli \
 	php7-zlib php7-curl php7-mbstring \
 	php7-json php7-session php7-iconv php7-xml \
-	nginx openssl openrc curl
+	nginx openssl openrc curl \
+	&& apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
 
 # Get files
 RUN mkdir -p /var/www/ \
@@ -30,6 +31,7 @@ RUN mkdir -p 			/run/nginx
 ADD nginx.conf 			/etc/nginx/conf.d/default.conf
 ADD setup.sh 			/srcs/
 RUN chmod +x 			/srcs/setup.sh
+ADD telegraf.conf		/etc/telegraf/
 
 
 # Expose port
