@@ -4,4 +4,4 @@ providers:
   type: file
   updateIntervalSeconds: 20
   options:
-    path: /var/lib/grafana/dashboards
+    path: /usr/share/grafana/conf/provisioning/dashboards/

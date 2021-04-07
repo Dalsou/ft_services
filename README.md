@@ -15,7 +15,6 @@ docker rm $(docker ps -a -q)
 À faire :
 
 - (harmoniser sous dossier) pas grand chose à faire
-- créer path wordpress phpmyadmin (reverse proxy)
 - create user wp (easy)
 - ajouter dashboards (id 5955)
 

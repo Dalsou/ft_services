@@ -6,9 +6,9 @@ function kdeploy () {
 	for service in "$@"
 	do
 		printf "\tBuilding \e[1;95m$service\e[0m image...\n"
-		docker build -t $service-img ./srcs/$service/ >/dev/null
+		docker build -t my-$service ./srcs/$service/ #>/dev/null
 		printf "\tCreating \e[1;93m$service\e[0m container...\n"
-		kubectl apply -f ./srcs/$service-deployment.yaml # 1>/dev/null
+		kubectl apply -f ./srcs/$service.yaml # 1>/dev/null
 	done
 }
 
@@ -16,7 +16,8 @@ function clean () {
 	for service in "$@"
 	do
 		echo "\e[92mCleaning $service...\e[m"
-		kubectl delete -f ./srcs/$service-deployment.yaml 2>/dev/null 1>&2
+		kubectl delete -f ./srcs/$service.yaml # 2>/dev/null 1>&2
+		docker rmi -f my-$service
 	done
 }
 
@@ -57,8 +58,8 @@ function dockexec () {
 	cmd="sh"
 	if [ -n "$2" ]; then dockerfile_path="$2" fi
 	if [ -n "$3" ]; then cmd="$3" fi
-	docker build -t $service-img $dockerfile_path && \
-	docker run --rm --name coucou -d -it $service-img && \
+	docker build -t my-$service $dockerfile_path && \
+	docker run --rm --name coucou -d -it my-$service && \
 	docker exec -it coucou $cmd; docker kill coucou 2>/dev/null 1>&2
 }
 

@@ -10,7 +10,8 @@ ADD grafana.ini 		/usr/share/grafana/conf/custom.ini
 ADD setup.sh			/srcs/setup.sh
 RUN chmod +x 			/srcs/setup.sh
 ADD datasources.yaml 	/usr/share/grafana/conf/provisioning/datasources/
-#ADD dashboards.yaml 	/usr/share/grafana/conf/provisioning/dashboards/
+ADD dashboards.yaml 	/usr/share/grafana/conf/provisioning/dashboards/
+ADD dashboard.json		/usr/share/grafana/conf/provisioning/dashboards/
 ADD telegraf.conf		/etc/telegraf/
 
 # Expose
