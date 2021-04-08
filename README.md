@@ -14,8 +14,8 @@ docker rm $(docker ps -a -q)
 
 À faire :
 
-- (harmoniser sous dossier) pas grand chose à faire
-- create user wp (easy)
-- ajouter dashboards (id 5955)
+- verifier ftps avec fezilla
+- setup.sh 
+- vérifier relance docker
 
 

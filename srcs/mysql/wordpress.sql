@@ -419,7 +419,10 @@ CREATE TABLE `wp_users` (
 --
 
 INSERT INTO `wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES
-(1, 'user', '$P$BmJfOK9TTOTX8vCK745YtyOPsefFVR.', 'user', 'amelie.foulquier@gmail.com', 'http://192.168.49.2:5050', '2021-03-25 13:34:25', '', 0, 'user');
+(1, 'admin', '$P$BmJfOK9TTOTX8vCK745YtyOPsefFVR.', 'admin', 'admin@prout.com', 'http://192.168.49.2:5050', '2021-03-25 13:34:25', '', 0, 'user'),
+(2, 'Francis', '$P$B83BDqAGZ5nh.E0bCs0Q55CMUrUsod.', 'francis', 'francis@prout.com', '', '2021-04-08 09:11:08', '1617873068:$P$BJfjAn/jjMa07Ldeu4t18LfVWUkLds0', 0, 'Francis Francis'),
+(3, 'Pipou', '$P$BbENVqVkPlIXefpt2WgbZn9bg116Uu1', 'pipou', 'pipou@prout.com', '', '2021-04-08 09:11:58', '1617873118:$P$Bma1xqPJYojo8hRmlsN7zB102BzNqm/', 0, 'Pipou Pipou'),
+(4, 'Jean-Mi', '$P$BiqCMq0mBI7kdvM7vlK2lTL2DomNsG/', 'jean-mi', 'jean-mi@prout.com', '', '2021-04-08 09:13:42', '1617873222:$P$B/Z1K03COtk6vi6zpxuZbi2flKbBUL0', 0, 'Jean Mi');
 
 --
 -- Index pour les tables déchargées

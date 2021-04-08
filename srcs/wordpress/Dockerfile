@@ -23,13 +23,6 @@ RUN mkdir -p /var/www/ \
 	&& mv wordpress /var/www/ \
 	&& rm *.gz
 
-# Config SSL
-RUN openssl req -newkey rsa:2048 -nodes -days 365 -x509 \
-	-subj "/C=FR/ST=IDF/L=Paris/O=42/CN=afoulqui" \
-	-addext "subjectAltName=DNS:localhost" \
-	-keyout /etc/ssl/private/nginx-selfsigned.key \
-	-out /etc/ssl/certs/nginx-selfsigned.crt
-
 # Add files
 ADD wp-config.php		/var/www/wordpress/
 RUN mkdir -p 			/run/nginx 
@@ -38,9 +31,8 @@ ADD setup.sh 			/srcs/
 RUN chmod +x 			/srcs/setup.sh
 ADD telegraf.conf		/etc/telegraf/
 
-RUN	sed -i 's/nobody/root/g' /etc/php7/php-fpm.d/www.conf
-RUN	echo "clear_env = no" >> /etc/php7/php-fpm.d/www.conf 
-
+# Expose
 EXPOSE 5050
 
+# Launch 
 CMD ["sh", "/srcs/setup.sh"]

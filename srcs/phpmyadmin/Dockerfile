@@ -17,13 +17,6 @@ RUN mkdir -p /var/www/ \
 	&& mv phpMyAdmin-5.1.0-all-languages /var/www/phpmyadmin \
 	&& rm *.gz
 
-# Config SSL
-RUN openssl req -newkey rsa:2048 -nodes -days 365 -x509 \
-	-subj "/C=FR/ST=IDF/L=Paris/O=42/CN=afoulqui" \
-	-addext "subjectAltName=DNS:localhost" \
-	-keyout /etc/ssl/private/nginx-selfsigned.key \
-	-out /etc/ssl/certs/nginx-selfsigned.crt
-
 # Copy files
 ADD config.inc.php		/var/www/phpmyadmin/
 RUN	chmod 744 			/var/www/phpmyadmin/config.inc.php
@@ -32,7 +25,6 @@ ADD nginx.conf 			/etc/nginx/conf.d/default.conf
 ADD setup.sh 			/srcs/
 RUN chmod +x 			/srcs/setup.sh
 ADD telegraf.conf		/etc/telegraf/
-
 
 # Expose port
 EXPOSE 5000
