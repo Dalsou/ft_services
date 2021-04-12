@@ -9,10 +9,6 @@ spec:
   selector:
     app: ftps
   ports:
-    - name: standard
-      protocol: TCP
-      port: 20
-      targetPort: 20
     - name: ftps
       protocol: TCP
       port: 21
@@ -45,6 +41,5 @@ spec:
         image: my_ftps
         imagePullPolicy: Never
         ports:
-        - containerPort: 20
         - containerPort: 21
         - containerPort: 40000
