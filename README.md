@@ -14,7 +14,7 @@ docker rm $(docker ps -a -q)
 
 À faire :
 
-- verifier ftps avec fezilla
+- problème 404 phpmyadmin
 - setup.sh 
 - vérifier relance docker
 

@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: ftps-service
   annotations:
-    metallb.universe.tf/allow-shared-ip: default
+    metallb.universe.tf/allow-shared-ip: shared
 spec:
   type: LoadBalancer
   selector:
@@ -12,11 +12,9 @@ spec:
     - name: ftps
       protocol: TCP
       port: 21
-      targetPort: 21
     - name: pasv-port
       protocol: TCP
-      port: 40000
-      targetPort: 40000
+      port: 30000
 
 ---
 
@@ -24,8 +22,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ftps-deployment
-  labels:
-    app: ftps
 spec:
   replicas: 1
   selector:
@@ -42,4 +38,4 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 21
-        - containerPort: 40000
+        - containerPort: 30000

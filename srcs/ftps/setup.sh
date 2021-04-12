@@ -11,7 +11,7 @@ mkdir -p /var/ftps
 
 # Create user
 adduser -D -h /var/ftps user
-echo "user:password" | chpassword
+echo "user:password" | chpasswd
 
 # Create test file
 echo "Hello World !" > /var/ftps/hello.txt

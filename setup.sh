@@ -21,8 +21,7 @@ kubectl apply -f ./srcs/metallb.yaml
 # Open dashboard
 minikube dashboard &
 
-# Build docker images
-
+# # Build docker images
 docker build -t my_nginx ./srcs/nginx
 docker build -t my_ftps ./srcs/ftps
 docker build -t my_mysql ./srcs/mysql
