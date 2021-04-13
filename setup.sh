@@ -22,15 +22,18 @@ kubectl apply -f ./srcs/metallb.yaml
 minikube dashboard &
 
 # # Build docker images
-docker build -t my_nginx ./srcs/nginx
-docker build -t my_ftps ./srcs/ftps
-docker build -t my_mysql ./srcs/mysql
-docker build -t my_wordpress ./srcs/wordpress
-docker build -t my_phpmyadmin ./srcs/phpmyadmin
-docker build -t my_grafana ./srcs/grafana
-docker build -t my_influxdb ./srcs/influxdb
+echo "Docker build init ..."
+docker build -t my_nginx ./srcs/nginx > /dev/null 2>&1
+docker build -t my_ftps ./srcs/ftps > /dev/null 2>&1
+docker build -t my_mysql ./srcs/mysql > /dev/null 2>&1
+docker build -t my_wordpress ./srcs/wordpress > /dev/null 2>&1
+docker build -t my_phpmyadmin ./srcs/phpmyadmin > /dev/null 2>&1
+docker build -t my_grafana ./srcs/grafana > /dev/null 2>&1
+docker build -t my_influxdb ./srcs/influxdb > /dev/null 2>&1
+echo "Docker build completed !"
 
 # Deploy service
+echo "Deploy init ..."
 kubectl apply -f ./srcs/nginx.yaml
 kubectl apply -f ./srcs/ftps.yaml
 kubectl apply -f ./srcs/mysql.yaml
@@ -38,5 +41,6 @@ kubectl apply -f ./srcs/wordpress.yaml
 kubectl apply -f ./srcs/phpmyadmin.yaml
 kubectl apply -f ./srcs/grafana.yaml
 kubectl apply -f ./srcs/influxdb.yaml
+echo "Deploy completed !"
 
 
