@@ -3,7 +3,7 @@ FROM alpine:latest
 
 # Update & install nginx & dependencies
 RUN apk update && apk add openrc --no-cache \
-	&& apk add nginx openssl openssh \
+	&& apk add nginx openssl openssh supervisor \
 	&& apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
 
 RUN mkdir -p /run/nginx www
@@ -16,6 +16,7 @@ ADD index.html				/www/
 RUN chown -R nginx:nginx	/www/
 ADD telegraf.conf			/etc/telegraf/
 ADD sshd_config 			/etc/ssh/
+ADD supervisord.conf		/etc/
 
 # Expose
 EXPOSE	80 443

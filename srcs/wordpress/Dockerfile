@@ -12,7 +12,7 @@ RUN apk update \
 	php7-pdo_mysql php7-pdo_sqlite php7-gettext \
 	php7-xmlreader php7-xmlrpc php7-bz2 \
 	php7-iconv php7-pdo_dblib php7-ctype \
-	nginx openssl openrc curl \
+	nginx openssl openrc curl supervisor \
 	&& apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
 
 
@@ -30,6 +30,7 @@ ADD nginx.conf 			/etc/nginx/conf.d/default.conf
 ADD setup.sh 			/srcs/
 RUN chmod +x 			/srcs/setup.sh
 ADD telegraf.conf		/etc/telegraf/
+ADD supervisord.conf	/etc/
 
 # Expose
 EXPOSE 5050

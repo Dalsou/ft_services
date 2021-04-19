@@ -3,7 +3,7 @@ FROM alpine:latest
 
 # Update & install dependencies
 RUN apk update \
-	&& apk add --no-cache grafana grafana-openrc vim \
+	&& apk add --no-cache grafana grafana-openrc supervisor \
 	&& apk add telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
 
 # Copy files
@@ -14,6 +14,7 @@ ADD datasources.yaml 	/usr/share/grafana/conf/provisioning/datasources/
 ADD dashboards.yaml 	/usr/share/grafana/conf/provisioning/dashboards/
 ADD dashboards			/var/lib/grafana/dashboards
 ADD telegraf.conf		/etc/telegraf/
+ADD supervisord.conf	/etc/
 
 # Expose
 EXPOSE 3000

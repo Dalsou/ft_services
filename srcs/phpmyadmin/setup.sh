@@ -6,11 +6,5 @@ openssl req -newkey rsa:2048 -nodes -days 365 -x509 \
 -keyout /etc/ssl/private/nginx-selfsigned.key \
 -out /etc/ssl/certs/nginx-selfsigned.crt
 
-# Start Telegraf
-telegraf & 
-
-# Start
-php-fpm7 -R && nginx -g 'daemon off;'
-
-# Keep container running
-tail -f /dev/null 
+# Start services
+supervisord
