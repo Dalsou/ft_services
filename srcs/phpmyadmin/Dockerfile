@@ -1,5 +1,5 @@
 # OS Base
-FROM alpine:latest
+FROM alpine:3.13
 
 # Update & install phpmyadmin
 RUN apk update \

@@ -1,5 +1,5 @@
 # Base OS
-FROM alpine:latest
+FROM alpine:3.13
 
 # Update & install dependencies
 RUN apk update \

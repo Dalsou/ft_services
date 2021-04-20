@@ -1,5 +1,5 @@
 # OS Base
-FROM alpine:latest
+FROM alpine:3.13
 
 # Update & Install tools and wordpress
 RUN apk update \

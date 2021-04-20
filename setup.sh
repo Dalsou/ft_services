@@ -5,6 +5,10 @@
 #/usr/bin/env zsh
 #sudo usermod -aG docker user42; newgrp docker
 
+# Delete any old processes
+minikube stop
+minikube delete
+
 # Starting minikube
 echo "Starting minikube ..."
 minikube start --driver=docker
@@ -49,5 +53,3 @@ kubectl apply -f ./srcs/phpmyadmin.yaml
 kubectl apply -f ./srcs/grafana.yaml
 kubectl apply -f ./srcs/influxdb.yaml
 echo "Deployment completed !"
-
-
