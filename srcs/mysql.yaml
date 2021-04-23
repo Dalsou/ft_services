@@ -33,7 +33,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: mysql
   labels:
     app: mysql
 spec:
@@ -52,6 +52,14 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 3306
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - 'pgrep telegraf && pgrep mysqld'
+          initialDelaySeconds: 30
+          periodSeconds: 10
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql

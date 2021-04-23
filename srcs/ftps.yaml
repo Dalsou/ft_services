@@ -12,9 +12,12 @@ spec:
     - name: ftps
       protocol: TCP
       port: 21
-    - name: pasv-port
+    - name: pasv-port-min
       protocol: TCP
       port: 30000
+    - name: pasv-port-max
+      protocol: TCP
+      port: 30021
 
 ---
 
@@ -36,7 +39,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ftps-deployment
+  name: ftps
   labels:
     app: ftps
 spec:
@@ -56,6 +59,15 @@ spec:
         ports:
         - containerPort: 21
         - containerPort: 30000
+        - containerPort: 30021
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - 'pgrep telegraf && pgrep vsftpd'
+          initialDelaySeconds: 30
+          periodSeconds: 10
         volumeMounts:
         - name: ftps-persistent-storage
           mountPath: /var/ftps

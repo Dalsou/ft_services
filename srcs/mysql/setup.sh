@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Start Telegraf
+telegraf & 
+
 # Install MariaDB database
 mariadb-install-db -u root
 
@@ -18,5 +21,5 @@ mysql -u root --execute="CREATE USER 'user'@'%' IDENTIFIED BY 'password';
 						 USE wordpress; 
 						 FLUSH PRIVILEGES;"
 
-# Start services
-supervisord
+# Keep container running
+sleep infinite

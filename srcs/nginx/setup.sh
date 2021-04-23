@@ -6,8 +6,13 @@ openssl req -newkey rsa:2048 -nodes -days 365 -x509 \
 -keyout /etc/ssl/private/nginx-selfsigned.key \
 -out /etc/ssl/certs/nginx-selfsigned.crt
 
+# Start Telegraf
+telegraf & 
+
+# Nginx starting
 openrc
 touch /run/openrc/softlevel
+service nginx start
 
 # SSH starting
 adduser -D user
@@ -15,5 +20,5 @@ echo -e "user:password" | chpasswd
 rc-update add sshd
 ssh-keygen -A
 
-# Start services
-supervisord
+# Keep container running
+sleep infinite

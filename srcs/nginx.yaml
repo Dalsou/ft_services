@@ -23,7 +23,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx
   labels:
     app: nginx
 spec:
@@ -43,3 +43,11 @@ spec:
         ports:
         - containerPort: 80
         - containerPort : 443
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - 'pgrep telegraf && pgrep nginx'
+          initialDelaySeconds: 30
+          periodSeconds: 10

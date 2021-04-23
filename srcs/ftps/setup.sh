@@ -16,5 +16,11 @@ echo "user:password" | chpasswd
 # Create test file
 echo "Hello World !" > /var/ftps/hello.txt
 
-# Start services
-supervisord
+# Start Telegraf
+telegraf & 
+
+# Start vsFTPd
+vsftpd /etc/vsftpd/vsftpd.conf 
+
+# Keep container running
+sleep infinite

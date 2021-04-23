@@ -33,7 +33,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: influxdb-deployment
+  name: influxdb
   labels:
     app: influxdb
 spec:
@@ -52,6 +52,14 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 8086
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - 'pgrep telegraf && pgrep influxd'
+          initialDelaySeconds: 30
+          periodSeconds: 10
         volumeMounts:
         - name: influxdb-persistent-storage
           mountPath: /var/lib/influxdb
