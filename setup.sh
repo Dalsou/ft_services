@@ -6,7 +6,7 @@ if [ ! -f ~/.vm_setup ]; then
 	minikube delete
 	sudo apt update
 	# Update minikube
-	curl -LO https://github.com/kubernetes/minikube/releases/download/v1.19.0/minikube_1.19.0-0_amd64.deb
+	curl -LO  https://github.com/kubernetes/minikube/releases/download/v1.19.0/minikube_1.19.0-0_amd64.deb
 	sudo rm /var/lib/dpkg/lock-frontend
 	sudo rm /var/lib/apt/lists/lock
 	sudo rm /var/cache/apt/archives/lock
@@ -17,6 +17,7 @@ if [ ! -f ~/.vm_setup ]; then
 	# Update kubectl
 	sudo rm -f /usr/local/bin/kubectl
 	curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
+	sudo chmod +x kubectl
 	sudo cp kubectl /usr/local/bin
 	sudo chmod +x /usr/local/bin/kubectl
 	sudo rm kubectl
